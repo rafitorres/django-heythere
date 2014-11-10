@@ -4,7 +4,7 @@ import ast
 
 from django.conf import settings as django_settings
 from django.core.mail import send_mail, send_mass_mail
-from django.db import models
+from django.db import models, transaction
 from django.utils.functional import lazy
 from django.utils.timezone import now
 
@@ -52,9 +52,11 @@ class NotificationManager(models.Manager):
         return self.get_query_set().filter(user=user)
 
     def clear_all(self, user):
-        notifications = self.model.objects.select_for_update().for_user(user)
-        for notification in notifications:
-            notification.read()
+        with transaction.atomic():
+            notifications = self.model.objects.select_for_update().for_user(
+                user)
+            for notification in notifications:
+                notification.read()
 
     def send_all_unsent(self, fail_silently=False):
         notifications = self.model.objects.all_unsent()

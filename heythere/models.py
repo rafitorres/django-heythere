@@ -49,7 +49,7 @@ class NotificationManager(models.Manager):
         return notification
 
     def for_user(self, user):
-        return self.get_query_set().filter(user=user)
+        return self.get_queryset().filter(user=user)
 
     def clear_all(self, user):
         with transaction.atomic():
@@ -69,19 +69,19 @@ class NotificationManager(models.Manager):
             note.save()
 
     def all_unsent(self):
-        return self.get_query_set().unsent()
+        return self.get_queryset().unsent()
 
     def unread(self, user):
-        return self.get_query_set().for_user(user).unread()
+        return self.get_queryset().for_user(user).unread()
 
     def read(self, user):
-        return self.get_query_set().for_user(user).read()
+        return self.get_queryset().for_user(user).read()
 
     def unsent(self, user):
-        return self.get_query_set().for_user(user).unsent()
+        return self.get_queryset().for_user(user).unsent()
 
     def sent(self, user):
-        return self.get_query_set().for_user(user).sent()
+        return self.get_queryset().for_user(user).sent()
 
 
 class Notification(models.Model):

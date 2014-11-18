@@ -35,7 +35,7 @@ class NotificationQuerySet(models.query.QuerySet):
 
 
 class NotificationManager(models.Manager):
-    def get_query_set(self):
+    def get_queryset(self):
         return NotificationQuerySet(self.model, using=self._db)
 
     def create_notification(self, user, notification_type, headline, body):

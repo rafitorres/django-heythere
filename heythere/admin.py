@@ -91,10 +91,9 @@ class NotificationAdmin(admin.ModelAdmin):
     def get_urls(self):
         admin_send_all_unsent = self.admin_site.admin_view(
             self.handle_sending_all_unsent)
-        return patterns(
-            '',
+        return [
             url(r'^send_all_unsent/$', admin_send_all_unsent,
                 name='heythere_notification_send_all_unsent'),
-        ) + super(NotificationAdmin, self).get_urls()
+        ] + super(NotificationAdmin, self).get_urls()
 
 admin.site.register(Notification, NotificationAdmin)

@@ -3,7 +3,7 @@ from __future__ import absolute_import
 import ast
 
 from django import forms
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django.contrib import admin
 from django.shortcuts import redirect
 from django.template.response import TemplateResponse

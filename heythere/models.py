@@ -96,7 +96,8 @@ class Notification(models.Model):
     sent_at = models.DateTimeField(null=True, blank=True)
     active = models.BooleanField(default=True)
     user = models.ForeignKey(django_settings.AUTH_USER_MODEL,
-                             related_name='notifications')
+                             related_name='notifications',
+                             on_delete=models.CASCADE)
     notification_type = models.CharField(max_length=100, default=u'DEFAULT')
     headline_dict = models.TextField(blank=True)
     body_dict = models.TextField(blank=True)

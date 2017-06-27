@@ -107,7 +107,7 @@ class Notification(models.Model):
 
     def __init__(self, *args, **kwargs):
         super(Notification, self).__init__(*args, **kwargs)
-        self._meta.get_field_by_name('notification_type')[0]._choices = lazy(
+        self._meta.get_field('notification_type')._choices = lazy(
             get_notification_types, list)()
 
     class Meta:

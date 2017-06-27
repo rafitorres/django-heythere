@@ -103,7 +103,7 @@ class TestNotificationModel(test.TestCase):
     def test_change_email_field(self):
         self.assertIn(
             ('CUSTOM_USER', 'Custom_user'),
-            Notification()._meta.get_field_by_name(
-                'notification_type')[0].get_choices())
+            Notification()._meta.get_field(
+                'notification_type').get_choices())
         notification = self._create_notification('CUSTOM_USER')
         self.assertIn('My body:', notification.body)
